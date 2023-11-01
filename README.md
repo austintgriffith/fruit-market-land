@@ -115,7 +115,7 @@ GNOSIS_RPC=http://127.0.0.1:8545
 GNOSIS_NETWORK_ID=31337
 ```
 
-(you can get this private key from the local storage. it's called `metaPrivateKey`) 
+(you can get this private key from the local storage. it's called `scaffoldEth2.burnerWallet.sk`) 
 
 ⛽️ if your this address is loaded up with local funds, you should be good to run:
 
