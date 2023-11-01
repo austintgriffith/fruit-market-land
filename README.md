@@ -105,12 +105,7 @@ yarn install
 
 (this tells your bots about the new contracts you've deployed)
 
-> 🧑‍🎤 next, create a `punkwallet.io` and point it at `localhost` and grab a bunch of funds from the faucet:
-
- ![image](https://github.com/BuidlGuidl/event-wallet/assets/2653167/64bb4db8-4032-4e8c-9e5f-0e3efde9c937)
-
-
-☢️ Notice: now you probably need to `yarn deploy --reset` and recopy over your `deployedContracts.js` 
+☢️ Notice: any time you need to redeploy, do `yarn deploy --reset` and recopy over your `deployedContracts.js` 
 
 > ✏️ copy the `.env.example` to `.env` file in the `bg-game-scripts` dir with the following info filled in:
 
