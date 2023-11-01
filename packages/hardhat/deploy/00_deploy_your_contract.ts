@@ -23,11 +23,14 @@ const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEn
   const { deploy } = hre.deployments;
   const signer = await hre.ethers.getSigner(deployer);
 
+  const YOUR_LOCAL_BURNER_ADDRESS = "0x9978C3eDdc20EeeE655ceB2e73aE4783632c039c"; //use punkwallet.io to create a burner that holds credits and can disperse
+
   const ownerAddress = deployer;
   const dexOwner = "0xEC1A970311702f3d356eB010A500EE4B5ab5C3Bb";
   const dispenserOwner = dexOwner;
   const dexPausers = [
     dexOwner,
+    YOUR_LOCAL_BURNER_ADDRESS,
     "0xd6f85d9d79E3a87eCFe98d907495f85Fb6DAF74f", //Damu
     "0xD26536C559B10C5f7261F3FfaFf728Fe1b3b0dEE", //Damu
     "0x6CE015E312e7240e85323A2a506cbD799534aB68", //Toady
@@ -117,7 +120,10 @@ const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEn
     await disperseFundsContract.transferOwnership(dispenserOwner);
   }
 
-  await saltContract.transfer(disperseFunds.address, hre.ethers.utils.parseEther("10000"));
+  await saltContract.transfer(disperseFunds.address, hre.ethers.utils.parseEther("5000"));
+
+  //send credits to a burner for other things like the trading bots
+  await saltContract.transfer(YOUR_LOCAL_BURNER_ADDRESS, hre.ethers.utils.parseEther("5000"));
 
   const sendXDai = await signer.sendTransaction({
     to: disperseFunds.address,
@@ -127,6 +133,9 @@ const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEn
 
   for (let i = 0; i < tokens.length; i++) {
     const token = tokens[i];
+
+    //send some tokens to your burner too
+    await tokensContracts[i].transfer(YOUR_LOCAL_BURNER_ADDRESS, hre.ethers.utils.parseEther("1000"));
 
     const dex = await deploy(`BasicDex${token.name}`, {
       from: deployer,
