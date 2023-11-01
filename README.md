@@ -4,11 +4,9 @@
 
 ```bash
 
-git clone https://github.com/BuidlGuidl/event-wallet game-wallet
+git clone https://github.com/BuidlGuidl/fruit-market
 
-cd game-wallet
-
-git checkout -b game-wallet
+cd fruit-market
 
 yarn install
 
