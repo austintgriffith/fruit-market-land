@@ -38,11 +38,13 @@ KV_REST_API_TOKEN=
 KV_REST_API_READ_ONLY_TOKEN=
 ```
 
+
+> 📱 hit the frontend at `http://localhost:3000`
+
+
 > 📝  next, inspect the `targetNetwork` var in `packages/nextjs/scaffold.config.ts` 
 
 (if you are deploying locally it needs to be `chains.hardhat` or `chains.gnosis` out in prod)
-
-> 📱 hit the frontend at `http://localhost:3000` 
 
 
 > 💁‍♂️ login as with your nickname:
@@ -59,6 +61,17 @@ KV_REST_API_READ_ONLY_TOKEN=
 
 > ⚙️ redeploy the whole stack with `yarn deploy --reset`
 
+🤔 try visiting [http://localhost:3000](http://localhost:3000) from an incognito window or another browser to have a fresh burner to play with
+
+(check in with a burner and drop some funds to it using your other account and the  `/checkedIn` page)
+
+⚖️ at this point, player should be able to trade credits for resources on the dexes:
+
+![image](https://github.com/BuidlGuidl/event-wallet/assets/2653167/09a019de-8112-4912-9889-d1fa47cb0d4d)
+
+---
+
+
 ## Charts and Leaderboard
 
 If you want to keep the charts and leaderboard updated you have to run a cron job requesting /api/admin/track-prices:
@@ -68,4 +81,60 @@ If you want to keep the charts and leaderboard updated you have to run a cron jo
 ```
 
 Or you can set the cron job at Vercel using the /packages/nextjs/vercel.json config file.
+
+(On localhost you can just use the browser to hit `http://localhost:3000/api/admin/track-prices` manually) 
+
+
+---
+
+## Trading Bots 
+
+If you want prices to randomly fluctuate you need to run bots that have a bunch of liquidity and trade randomly:
+
+```bash
+git clone https://github.com/BuidlGuidl/fruit-market-trader
+
+cd fruit-market-trader
+
+yarn install
+```
+
+> 💾 you will need to copy your `fruit-market` `packages/nextjs/generated/deployedContracts.ts` into this `fruit-market-trader/deployedContracts.js`
+
+⚠️ notice it changes from `.ts` to `.js` - you will also have to remove the `as const` from the end
+
+(this tells your bots about the new contracts you've deployed)
+
+> 🧑‍🎤 next, create a `punkwallet.io` and point it at `localhost` and grab a bunch of funds from the faucet:
+
+ ![image](https://github.com/BuidlGuidl/event-wallet/assets/2653167/64bb4db8-4032-4e8c-9e5f-0e3efde9c937)
+
+
+☢️ Notice: now you probably need to `yarn deploy --reset` and recopy over your `deployedContracts.js` 
+
+> ✏️ copy the `.env.example` to `.env` file in the `bg-game-scripts` dir with the following info filled in:
+
+```
+DEPLOYER_PRIVATE_KEY=0xYOUR_PRIVATE_KEY_FROM_YOUR_LOCAL_PUNK_WALLET
+GNOSIS_RPC=http://127.0.0.1:8545
+GNOSIS_NETWORK_ID=31337
+```
+
+⛽️ if your "deployer" address is loaded up with local funds, you should be good to run:
+
+```bash
+node batchPrep.js
+```
+
+⚙️ this is going to generate a bunch of trader accounts, send them tokens, and save the private keys up in your `.env` file:
+
+![image](https://github.com/BuidlGuidl/event-wallet/assets/2653167/d59b9c72-0a6d-4029-8257-0f4d0b8212dd)
+
+(if anything fails here it probably means your burner is not correctly funded with credits and assets and you can debug balances using http://localhost:3000/debug)
+
+> 🍎 now you can start a trading bot for each resource like:
+
+```bash
+node tradeDex.js Apple
+```
 
