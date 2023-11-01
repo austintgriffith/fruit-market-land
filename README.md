@@ -12,21 +12,6 @@ yarn install
 
 ```
 
-✏️ first, check out the `packages/nextjs/.env.example` file for ENV vars 
-
-> 💿 you'll need to spin up a KV (key value storage) in vercel and copy/paste in the env.local fields:
-
-
-```
-NEXT_PUBLIC_DEPLOY_BLOCK=0
-NEXT_PUBLIC_LIVE_URL=https://event-wallet.vercel.app
-KV_URL=
-KV_REST_API_URL=
-KV_REST_API_TOKEN=
-KV_REST_API_READ_ONLY_TOKEN=
-```
-
-
 > ⚙️ bring up the chain and deploy your contracts 
 
 ```bash
@@ -39,6 +24,19 @@ yarn start
 
 ```
 
+> 🖨 copy `packages/nextjs/.env.example` to the name `.env` and edit your frontend env:
+
+> 💿 you'll need to spin up a KV (key value storage) in vercel and copy/paste in the env.local fields:
+
+
+```
+NEXT_PUBLIC_DEPLOY_BLOCK=0
+NEXT_PUBLIC_LIVE_URL=https://event-wallet.vercel.app
+KV_URL=
+KV_REST_API_URL=
+KV_REST_API_TOKEN=
+KV_REST_API_READ_ONLY_TOKEN=
+```
 
 > 📝  next, inspect the `targetNetwork` var in `packages/nextjs/scaffold.config.ts` 
 
