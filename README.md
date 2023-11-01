@@ -107,15 +107,17 @@ yarn install
 
 ☢️ Notice: any time you need to redeploy, do `yarn deploy --reset` and recopy over your `deployedContracts.js` 
 
-> ✏️ copy the `.env.example` to `.env` file in the `bg-game-scripts` dir with the following info filled in:
+> ✏️ copy the `.env.example` to `.env` file in the `fruit-market-trader` dir with the following info filled in:
 
 ```
-DEPLOYER_PRIVATE_KEY=0xYOUR_PRIVATE_KEY_FROM_YOUR_LOCAL_PUNK_WALLET
+DEPLOYER_PRIVATE_KEY=0xYOUR_PRIVATE_KEY_FROM_YOUR_LOCAL_STORAGE
 GNOSIS_RPC=http://127.0.0.1:8545
 GNOSIS_NETWORK_ID=31337
 ```
 
-⛽️ if your "deployer" address is loaded up with local funds, you should be good to run:
+(you can get this private key from the local storage. it's called `metaPrivateKey`) 
+
+⛽️ if your this address is loaded up with local funds, you should be good to run:
 
 ```bash
 node batchPrep.js
