@@ -4,6 +4,7 @@ import Image from "next/image";
 import type { NextPage } from "next";
 import { useAccount } from "wagmi";
 import { CheckCircleIcon, EllipsisHorizontalCircleIcon, ExclamationCircleIcon } from "@heroicons/react/24/outline";
+import { LandOwnership } from "~~/components/LandOwnership";
 import { QrCodeButton } from "~~/components/game-wallet/QrCodeButton";
 import { Balance, FaucetButton } from "~~/components/scaffold-eth";
 import { AddressMain } from "~~/components/scaffold-eth/AddressMain";
@@ -170,6 +171,8 @@ const Home: NextPage = () => {
           <div className="md:static fixed bottom-0 left-0 w-full pb-4 bg-white md:bg-[#ffffff00] h-[50vh] md:h-full overflow-y-scroll rounded-t-3xl p-2 no-scrollbar">
             {screenRender}
           </div>
+
+          <LandOwnership />
         </div>
       </div>
     </>

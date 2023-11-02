@@ -37,6 +37,7 @@ const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEn
     "0xD26536C559B10C5f7261F3FfaFf728Fe1b3b0dEE", //Toady
     "0xA7430Da2932cf53B329B4eE1307edb361B5852ea", //Austin
     "0x9312Ead97CD5cfDd43EEd47261FB69081e2e17c3", //Austin
+    "0x24A1F90D3243844d4020f042E1310fa16ACdF752",
   ];
   const dispersers = dexPausers;
   const minters = dexPausers;
@@ -163,6 +164,18 @@ const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEn
       await dexContract.transferOwnership(dexOwner);
     }
   }
+
+  console.log("Deploying Land");
+  const landContract = await deploy("Land", {
+    from: deployer,
+    args: [salt.address, tokensContracts[3].address],
+    log: true,
+    autoMine: true,
+    contract: "Land",
+  });
+
+  //put some strawberries into the land contract (really it should just get mint privs right?)
+  await tokensContracts[3].transfer(landContract.address, hre.ethers.utils.parseEther("100"));
 };
 
 export default deployYourContract;
